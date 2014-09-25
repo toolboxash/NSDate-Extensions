@@ -20,12 +20,15 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 @implementation NSDate (Utilities)
 
 // Courtesy of Lukasz Margielewski
-// Updated via Holger Haenisch
 + (NSCalendar *) currentCalendar
 {
-    static NSCalendar *sharedCalendar = nil;
-    if (!sharedCalendar)
+    static dispatch_once_t pred;
+    static __strong NSCalendar *sharedCalendar = nil;
+    
+    dispatch_once(&pred, ^{
         sharedCalendar = [NSCalendar autoupdatingCurrentCalendar];
+    });
+    
     return sharedCalendar;
 }
 
