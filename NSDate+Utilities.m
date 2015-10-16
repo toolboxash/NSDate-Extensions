@@ -386,6 +386,16 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 
 #pragma mark - Retrieving Intervals
 
+- (NSInteger) secondsAfterDate: (NSDate *) aDate
+{
+    return lround([self timeIntervalSinceDate:aDate]);
+}
+
+- (NSInteger) secondsBeforeDate: (NSDate *) aDate
+{
+    return lround([aDate timeIntervalSinceDate:self]);
+}
+
 - (NSInteger) minutesAfterDate: (NSDate *) aDate
 {
 	NSTimeInterval ti = [self timeIntervalSinceDate:aDate];
@@ -430,6 +440,80 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay fromDate:self toDate:anotherDate options:0];
     return components.day;
 }
+
+- (NSInteger)sleepsAfterDate:(NSDate*)anotherDate
+{
+    // is it different for until / since ?
+    NSInteger sleeps = [[[NSCalendar currentCalendar] components: kCFCalendarUnitDay
+                                                        fromDate: [self dateAtStartOfDay]
+                                                          toDate: [anotherDate dateAtStartOfDay]
+                                                         options: 0] day];
+    
+    return sleeps;
+}
+
+- (NSInteger)sleepsBeforeDate:(NSDate*)anotherDate
+{
+    // is it different for until / since ?
+    NSInteger sleeps = [[[NSCalendar currentCalendar] components: kCFCalendarUnitDay
+                                                        fromDate: [anotherDate dateAtStartOfDay]
+                                                          toDate: [self dateAtStartOfDay]
+                                                         options: 0] day];
+    
+    return sleeps;
+}
+
+
+- (NSInteger) weeksAfterDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitWeek
+                                            fromDate: self
+                                              toDate: aDate
+                                             options: 0] week];
+}
+
+- (NSInteger) weeksBeforeDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitWeek
+                                            fromDate: aDate
+                                              toDate: self
+                                             options: 0] week];
+}
+
+- (NSInteger) monthsAfterDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitMonth
+                                            fromDate: self
+                                              toDate: aDate
+                                             options: 0] month];
+}
+
+- (NSInteger) monthsBeforeDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitMonth
+                                            fromDate: aDate
+                                              toDate: self
+                                             options: 0] month];
+}
+
+- (NSInteger) yearsAfterDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitYear
+                                            fromDate: self
+                                              toDate: aDate
+                                             options: 0] year];
+}
+
+- (NSInteger) yearsBeforeDate: (NSDate *) aDate
+{
+    return [[[NSCalendar currentCalendar] components: kCFCalendarUnitYear
+                                            fromDate: aDate
+                                              toDate: self
+                                             options: 0] year];
+}
+
+
+
 
 #pragma mark - Decomposing Dates
 

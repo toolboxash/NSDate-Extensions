@@ -87,13 +87,24 @@
 - (NSDate *) dateAtEndOfDay;
 
 // Retrieving intervals
+- (NSInteger) secondsAfterDate: (NSDate *) aDate;
+- (NSInteger) secondsBeforeDate: (NSDate *) aDate;
 - (NSInteger) minutesAfterDate: (NSDate *) aDate;
 - (NSInteger) minutesBeforeDate: (NSDate *) aDate;
 - (NSInteger) hoursAfterDate: (NSDate *) aDate;
 - (NSInteger) hoursBeforeDate: (NSDate *) aDate;
 - (NSInteger) daysAfterDate: (NSDate *) aDate;
 - (NSInteger) daysBeforeDate: (NSDate *) aDate;
-- (NSInteger)distanceInDaysToDate:(NSDate *)anotherDate;
+
+- (NSInteger) sleepsAfterDate:(NSDate*)anotherDate;   // similar to days, but ignoreing time, so 11.59 to 12.01 is 1 day
+- (NSInteger) sleepsBeforeDate:(NSDate*)anotherDate;
+
+- (NSInteger) weeksAfterDate: (NSDate *) aDate;
+- (NSInteger) weeksBeforeDate: (NSDate *) aDate;
+- (NSInteger) monthsAfterDate: (NSDate *) aDate;
+- (NSInteger) monthsBeforeDate: (NSDate *) aDate;
+- (NSInteger) yearsAfterDate: (NSDate *) aDate;
+- (NSInteger) yearsBeforeDate: (NSDate *) aDate;
 
 // Decomposing dates
 @property (readonly) NSInteger nearestHour;
